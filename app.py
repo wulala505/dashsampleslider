@@ -1,9 +1,13 @@
+import os
+import dash
+from dash.dependencies import Input, Output, State
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output
-import dash
-
+import plotly.graph_objs as go
 app = dash.Dash()
+
+app = dash.Dash(__name__)
+server = app.server
 
 # Use the following function when accessing the value of 'my-slider'
 # in callbacks to transform the output value to logarithmic
