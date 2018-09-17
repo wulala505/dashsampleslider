@@ -1,12 +1,6 @@
-import os
 import dash
-from dash.dependencies import Input, Output, State
-import dash_core_components as dcc
 import dash_html_components as html
-import plotly.graph_objs as go
-
-app = dash.Dash()
-server = app.server
+import dash_core_components as dcc
 
 app = dash.Dash()
 app.layout = html.Div([
