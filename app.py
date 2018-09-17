@@ -4,35 +4,28 @@ from dash.dependencies import Input, Output, State
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
-app = dash.Dash()
 
 app = dash.Dash(__name__)
 server = app.server
 
-# Use the following function when accessing the value of 'my-slider'
-# in callbacks to transform the output value to logarithmic
-def transform_value(value):
-    return 10 ** value
-
-
+app = dash.Dash()
 app.layout = html.Div([
     dcc.Slider(
-        id='slider-updatemode',
-        marks={i: '{}'.format(10 ** i) for i in range(4)},
-        max=3,
-        value=2,
-        step=0.01,
-        updatemode='drag'
+        id='my-slider',
+        min=0,
+        max=20,
+        step=0.5,
+        value=10,
     ),
-    html.Div(id='updatemode-output-container', style={'margin-top': 20})
+    html.Div(id='slider-output-container')
 ])
 
 
-@app.callback(Output('updatemode-output-container', 'children'),
-              [Input('slider-updatemode', 'value')])
-def display_value(value):
-    return 'Linear Value: {} | \
-            Log Value: {:0.2f}'.format(value, transform_value(value))
+@app.callback(
+    dash.dependencies.Output('slider-output-container', 'children'),
+    [dash.dependencies.Input('my-slider', 'value')])
+def update_output(value):
+    return 'You have selected "{}"'.format(value)
 
 
 if __name__ == '__main__':
